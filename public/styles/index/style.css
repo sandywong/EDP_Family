@@ -18,6 +18,7 @@ textarea { line-height:1.5em; }
 table.siteTable { border-collapse:separate; border-spacing:10px;}
 table.siteTable1 {background:url(images/site1.jpg) no-repeat left; table-layout:fixed; width:450px; height:70px; text-align:center;}
 table.siteTable2 {background:url(images/site2.jpg) no-repeat left;table-layout:fixed; width:225px; height:70px; text-align:center; }
+td.site {cursor:pointer;}
 
 
 image { border:none; }
