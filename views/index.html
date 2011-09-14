@@ -13,17 +13,25 @@
     </form>
     <ul>
       <%
-      var maxX = family[0].x;
-      var minX = family[0].x;
+      var maxX;
+      var minX;
+      if(family && family[0]){
+        maxX = family[0].x;
+        minX = family[0].x;
 
-      for(var i = 0, len = family.length; i < len; i++) {
-        if(family[i].x > maxX)
-          maxX = family[i].x;
-        if(family[i].x < minX)
-          minX = family[i].x;
+        for(var i = 0, len = family.length; i < len; i++) {
+          if(family[i].x > maxX)
+            maxX = family[i].x;
+          if(family[i].x < minX)
+            minX = family[i].x;
+        }
+        minX -= minX % 2;
+        maxX += 1 - (maxX % 2);
       }
-      minX -= minX % 2;
-      maxX += 1 - (maxX % 2);
+      else{
+        maxX = 11;
+        minX = 0;
+      }
       var i = minX = 0;
       var j;
       var mid = 0;
