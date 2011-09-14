@@ -44,7 +44,7 @@
               <% for(; i < tempX+2 && i <= maxX; i++){ %>
               <tr>
                 <% for(j = 0; j < 6; j++){ %>
-                  <% var isSited = (i == family[mid].x && j == family[mid].y); %>
+                  <% var isSited = (family[mid]? (i == family[mid].x && j == family[mid].y) : false); %>
                 <td class="site" onclick="getDetail('/detail/<%- i %>/<%- j%>', <%- i %>, <%- j%>)" id="cell<%- i %>_<%- j%>"
                   <% if(isSited){
                     var showName = (family[mid].nickName == null?family[mid].name : family[mid].nickName); 
@@ -68,7 +68,7 @@
               <% for(i = tempX; i < tempX+2 && i <= maxX; i++){ %>
               <tr>
                 <% for(j = 6; j < 9; j++){ %>
-                  <% isSited = (i == family[mid].x && j == family[mid].y); %>
+                  <% isSited = (family[mid]? (i == family[mid].x && j == family[mid].y) : false); %>
                 <td class="site" onclick="getDetail('/detail/<%- i %>/<%- j %>', <%- i %>, <%- j%>)" id="cell<%- i %>_<%- j%>"
                   <% if(isSited){
                     var showName = (family[mid].nickName == null?family[mid].name : family[mid].nickName); 
