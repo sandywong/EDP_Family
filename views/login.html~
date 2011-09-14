@@ -1,0 +1,87 @@
+
+  <div class="login">
+    <!--界面-->
+	<form action="/login/checkPwd" method="post" id="login_checkPwd">
+	  <input type="hidden" name="csrf" value="<%- csrf %>" />
+      <p>
+      姓名：<input type="text" name="name" />
+      密码: <input type="text" name="pwd" />
+      <label id="emailLabel" style="color:red;display:none">密码至少6位，由字母和数字组成，请重新输入！</label>
+      </p>
+      <p>
+      <input name="submit" type="submit" value="登录" />
+      </p>
+    </form>
+  </div>
+
+    <!--事件相应函数
+    <script type="text/javascript">
+      var emailCorrect = true;
+	  
+	  function show(){
+		  if(!checkEmail())
+			  return;
+		  var name = document.getElementById("name").value;
+		  var mail = document.getElementById("mail").value;
+		  alert("name:" + name + "\nE-mail:" + mail);
+		  if(name != "" && name != null)
+			  setCookie('name', name, 1);
+		  if(mail != "" && mail != null)
+			  setCookie('mail', mail, 1);
+      }
+	  
+      function checkEmail(){
+		  var email = document.getElementById("mail").value;
+		  emailCorrect = (email == email.match(/^\w+[@]\w+[.][\w.]+$/));
+		  if(emailCorrect){
+			  document.getElementById("emailLabel").style.display = 'none';
+			  document.getElementById("submit").disabled = '';
+			  return true;
+		  }
+		  else{
+			  document.getElementById("emailLabel").style.display = '';
+			  document.getElementById("submit").disabled = 'disabled';
+		  }
+		  return false;
+	  }
+	  
+      //回调函数的形式
+      document.getElementById("mail").onblur = checkEmail;
+      document.getElementById("form").onclick = show;
+      //注册事件的形式
+      //document.getElementById("form").addEventListener('click', show, false);
+      //document.getElementById("mail").addEventListener('blur', checkEmail, false);
+	  
+	  //设置cookie
+	  function setCookie(c_name, value, expireDays){
+		  var exDate = new Date(new Date().getTime() + expireDays * 24 * 3600 * 1000);
+		  document.cookie = c_name + "=" + escape(value) + ((expireDays == null)? "" : (";expires=" + exDate.toGMTString()));
+	  }
+
+      //获取cookie
+      function getCookie(c_name){
+		  if(document.cookie.length > 0){
+			  c_start = document.cookie.indexOf(c_name + "=");
+			  if(c_name != -1){
+				  c_start = c_start + c_name.length + 1;
+				  c_end = document.cookie.indexOf(";", c_start);
+				  if(c_end == -1)
+					  c_end = document.cookie.length;
+				  return unescape(document.cookie.substring(c_start, c_end));
+			  }
+		  }
+		  return "";
+	  }
+
+      //onload && 检查cookie
+      function checkCookie(){
+		  name = getCookie('name');
+		  //alert("cookie name:" + name);
+		  if(name != null && name != "")
+			  document.getElementById("name").value = name;
+		  mail = getCookie('mail');
+		  if(mail != null && mail != "")
+			  document.getElementById("mail").value = mail;
+	  }
+  </script>
+  -->

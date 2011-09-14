@@ -1,0 +1,68 @@
+
+var config = require('../config')
+ , db = config.db;
+
+exports.showLogin = function(req, res){
+    res.render('login');
+};
+
+exports.checkPwd = function(req, res, next){
+    var name = req.body.name || '';
+    var pwd = req.body.pwd || '';
+    name = name.trim();
+    if(!name){
+        return res.render('error', {message: '没用户名怎么登录，重新输入吧，亲~'});
+    }
+    db.query('select * from user where name=? and pwd=?', [name, pwd], function(err, result){
+        if(err) return next(err);
+        if(result && result.length > 0){
+            console.log("user: " + name + " log in...");
+            req.session.userName = name;
+            countDown(req, res);
+            res.redirect('/');
+        }
+        else{
+            return res.render('error', {message: '用户名或密码错误噢，亲~'});
+        }
+    });
+};
+
+var logout = exports.logout = function(req, res){
+    if(intervalId != null)
+        clearInterval(intervalId);
+    name = req.session.userName;
+    req.session.destroy();
+    console.log("user:" + name + " log out...");
+    res.redirect('/login');
+};
+
+var intervalId = null;
+
+var countDown = exports.countDown = function(req, res){
+    countDownStop();
+    intervalId = setInterval(logout, 5 * 1000, req, res);
+    console.log(intervalId);
+}
+
+function countDownStop(){
+    if(intervalId != null)
+        clearInterval(intervalId);
+    intervalId = null;
+}
+
+/*
+var checkEmail = function(req, res, next){
+	 var email = document.getElementById("mail").value;
+		  emailCorrect = (email == email.match(/^\w+[@]\w+[.][\w.]+$/));
+		  if(emailCorrect){
+			  document.getElementById("emailLabel").style.display = 'none';
+			  document.getElementById("submit").disabled = '';
+			  return true;
+		  }
+		  else{
+			  document.getElementById("emailLabel").style.display = '';
+			  document.getElementById("submit").disabled = 'disabled';
+		  }
+		  return false;
+}
+*/
