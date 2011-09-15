@@ -187,8 +187,6 @@
           },
           success:function(data){
             alert("保存成功！");
-            $("#msgTitle").click();
-            window.location.reload();
           }
       });
     }
@@ -256,6 +254,9 @@
 
     function editDetail(){
       document.getElementById("msgTxt").innerHTML = editDetailString(false);
+      document.getElementById("msgTxt").onkeydown = function(event){
+        
+      };
     }
 
     function editImage(id){
@@ -298,6 +299,7 @@
 
     function editDetailString(isNew){
       var string = "<form id=\"editDetailForm\" >";
+      string += "<button class=\"saveBtn\" onclick=\"saveDetail("+ isNew +");return false;\" >保存</button>";
       string += "<div id=\"imageDiv\"><p><img src=\"images/" 
         + person.mid 
         + ".jpg\" onerror=\"this.src=\'images/default.jpg\'\" /></p><p><button id=\"editImageBtn\" onclick=\"editImage(\'" 
@@ -330,7 +332,6 @@
       }
       string += "<tr><td>标签：</td><td><input type=\"text\" id=\"tagTx\" value=\"" 
         + tagsString + "\" /></td></tr></table>";
-      string += "<button class=\"saveBtn\" onclick=\"saveDetail("+ isNew +");return false;\" >保存</button>";
       string += "</form>";
 
       return string;
@@ -432,14 +433,8 @@
         document.body.removeChild(bgObj); 
         document.getElementById("msgDiv").removeChild(title); 
         document.body.removeChild(msgObj); 
-      } 
-      bgObj.onkeydown = function(e){
-        if(e.keyCode == 27){
-          document.body.removeChild(bgObj); 
-          document.getElementById("msgDiv").removeChild(title); 
-          document.body.removeChild(msgObj); 
-        }
-      }
+        window.location.reload();
+      }; 
       document.body.appendChild(msgObj); 
       document.getElementById("msgDiv").appendChild(title); 
       var txt=document.createElement("p"); 
