@@ -39,7 +39,7 @@
 
       var i = minX = 0;
       var j;
-      var mid = 0;
+      var mid;
       %>
       <table class="siteTable">
         <% for(var tableIndex = 0; tableIndex < Math.floor((maxX-minX)/2+1); tableIndex++){ %>
@@ -48,8 +48,22 @@
               <% var tempX = i; %>
               <% for(; i < tempX+2 && i <= maxX; i++){ %>
               <tr>
-                <% for(j = 0; j < 6; j++){ %>
-                  <% var isSited = (family[mid]? (i == family[mid].x && j == family[mid].y) : false); %>
+                <% for(j = 0; j < 6; j++){ 
+                    var isSited;
+                    if(family.length <= 0)
+                      isSited = false;
+                    else{
+                      isSited = false;
+                      mid = 0;
+                      for(var k = 0; k < family.length; k++){
+                        if(i == family[k].x && j == family[k].y){
+                          isSited = true;
+                          mid = k;
+                          break;
+                        }
+                      }
+                    }
+                %>
                 <td class="site" onclick="getDetail('/detail/<%- i %>/<%- j%>', <%- i %>, <%- j%>)" id="cell<%- i %>_<%- j%>"
                   <% if(isSited){
                     var showName = (family[mid].nickName == null?family[mid].name : family[mid].nickName); 
@@ -72,8 +86,22 @@
             <table class="siteTable2">
               <% for(i = tempX; i < tempX+2 && i <= maxX; i++){ %>
               <tr>
-                <% for(j = 6; j < 9; j++){ %>
-                  <% isSited = (family[mid]? (i == family[mid].x && j == family[mid].y) : false); %>
+                <% for(j = 6; j < 9; j++){ 
+                    var isSited;
+                    if(family.length <= 0)
+                      isSited = false;
+                    else{
+                      isSited = false;
+                      mid = 0;
+                      for(var k = 0; k < family.length; k++){
+                        if(i == family[k].x && j == family[k].y){
+                          isSited = true;
+                          mid = k;
+                          break;
+                        }
+                      }
+                    }
+                %>
                 <td class="site" onclick="getDetail('/detail/<%- i %>/<%- j %>', <%- i %>, <%- j%>)" id="cell<%- i %>_<%- j%>"
                   <% if(isSited){
                     var showName = (family[mid].nickName == null?family[mid].name : family[mid].nickName); 
